@@ -8,7 +8,7 @@ import config from 'config';
 
 const APP = './app';
 const DIST = './dist';
-const DEV_MODE = process.env.NODE_ENV != 'production';
+const DEV_MODE = process.env.NODE_ENV !== 'production';
 
 const GLOBALS = {
   process: {
@@ -23,7 +23,7 @@ const query = {
   modules: true,
   importLoaders: 1,
   sourceMap: true,
-  localIdentName: DEV_MODE ? '[name]__[local]---[hash:base64:5]' : '[hash:base64:5]'
+  localIdentName: DEV_MODE ? '[name]__[local]---[hash:base64:5]' : '[hash:base64:5]',
 };
 
 const extractCSS = new ExtractTextPlugin(APP, '[name]-[hash].css', {
@@ -54,17 +54,17 @@ const getStylusConfig = () => ({
   ],
 });
 
-const getOptimizeConfig = () => {
+function getOptimizeConfig() {
   return DEV_MODE ? []
     : [
-    new webpack.optimize.DedupePlugin,
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      }
-    }),
-  ];
-};
+      new webpack.optimize.DedupePlugin(),
+      new webpack.optimize.UglifyJsPlugin({
+        compress: {
+          warnings: false,
+        },
+      }),
+    ];
+}
 
 export default {
   context: path.join(__dirname, APP),
@@ -74,7 +74,7 @@ export default {
       'react-dom',
       'classnames',
     ],
-    app: './index.js'
+    app: './index.js',
   },
   output: {
     path: path.join(__dirname, DIST),
@@ -85,7 +85,7 @@ export default {
       {
         test: /(\.js|\.jsx)$/,
         exclude: /node_modules/,
-        loader: 'babel-loader'
+        loader: 'babel-loader',
       },
       {
         test: /_\.styl$/,
@@ -93,8 +93,8 @@ export default {
           DEV_MODE,
           [
             `css-loader?${qs.stringify(query)}`,
-            'stylus-loader'
-          ]
+            'stylus-loader',
+          ],
         ),
       },
       {
@@ -103,8 +103,8 @@ export default {
           DEV_MODE,
           [
             `css-loader?${qs.stringify({ sourceMap: true })}`,
-            'stylus-loader'
-          ]
+            'stylus-loader',
+          ],
         ),
       },
       {
@@ -117,15 +117,15 @@ export default {
       {
         test: /\.(png|jpg|etf|ttf)$/,
         loader: DEV_MODE ? 'url-loader' : 'file-loader',
-      }
-    ]
+      },
+    ],
   },
   stylus: getStylusConfig(),
   plugins: [
     extractCSS,
     new HtmlWebpackPlugin({
       title: 'REACT REDUX QUICK START',
-      template: './index.html'
+      template: './index.html',
     }),
     new webpack.DefinePlugin(GLOBALS),
     ...getOptimizeConfig(),
@@ -134,6 +134,6 @@ export default {
     extensions: ['', '.js', '.jsx'],
     alias: {
       config: path.join(__dirname, './modules/config/index.js'),
-    }
+    },
   },
 };
