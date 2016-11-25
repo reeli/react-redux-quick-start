@@ -1,10 +1,6 @@
 {
   "env": {
-<<<<<<< HEAD
-    "browser": true,
-=======
     "browser": true, // make sure window and document can be used
->>>>>>> update eslint
     "es6": true
   },
   "extends": "airbnb",
