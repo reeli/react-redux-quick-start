@@ -6,7 +6,7 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import autoprefixerStylus from 'autoprefixer-stylus';
 import config from 'config';
 
-const APP = './app';
+const APP = './mobile';
 const DIST = './dist';
 const DEV_MODE = process.env.NODE_ENV !== 'production';
 
