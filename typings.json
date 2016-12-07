@@ -1,0 +1,9 @@
+{
+  "name": "react-redux-quick-start",
+  "globalDependencies": {
+    "node": "registry:env/node#6.0.0+20161105011511",
+    "react": "registry:dt/react#0.14.0+20161203201537",
+    "react-dom": "registry:dt/react-dom#0.14.0+20160412154040",
+    "react-router": "registry:dt/react-router#2.0.0+20161117134353"
+  }
+}

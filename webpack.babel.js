@@ -57,16 +57,18 @@ const getStylusConfig = () => ({
 function getOptimizeConfig() {
   return DEV_MODE ? []
     : [
-      new webpack.optimize.DedupePlugin(),
-      new webpack.optimize.UglifyJsPlugin({
-        compress: {
-          warnings: false,
-        },
-      }),
-    ];
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false,
+      },
+    }),
+  ];
 }
 
 export default {
+  cache: true,
+  devtool: 'source-map',
   context: path.join(__dirname, APP),
   entry: {
     vendor: [
@@ -74,7 +76,7 @@ export default {
       'react-dom',
       'classnames',
     ],
-    app: './index.js',
+    app: './index.tsx',
   },
   output: {
     path: path.join(__dirname, DIST),
@@ -86,6 +88,11 @@ export default {
         test: /(\.js|\.jsx)$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
+      },
+      {
+        test: /\.ts(x?)$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader!ts-loader',
       },
       {
         test: /_\.styl$/,
@@ -119,6 +126,12 @@ export default {
         loader: DEV_MODE ? 'url-loader' : 'file-loader',
       },
     ],
+    preLoaders: [
+      {
+        test: /\.js/,
+        loader: 'source-map-loader',
+      }
+    ]
   },
   stylus: getStylusConfig(),
   plugins: [
@@ -131,7 +144,7 @@ export default {
     ...getOptimizeConfig(),
   ],
   resolve: {
-    extensions: ['', '.js', '.jsx'],
+    extensions: ['', '.js', '.jsx', '.ts', '.tsx'],
     alias: {
       config: path.join(__dirname, './modules/config/index.js'),
     },

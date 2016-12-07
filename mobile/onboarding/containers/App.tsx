@@ -1,7 +1,7 @@
-import React, { Component, PropTypes } from 'react';
+import * as React from 'react';
 import Header from '../components/Header';
 
-class App extends Component {
+class App extends React.Component<{},{}> {
   render() {
     return (
       <div>
