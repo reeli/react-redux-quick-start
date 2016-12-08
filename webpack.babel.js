@@ -57,13 +57,13 @@ const getStylusConfig = () => ({
 function getOptimizeConfig() {
   return DEV_MODE ? []
     : [
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false,
-      },
-    }),
-  ];
+      new webpack.optimize.DedupePlugin(),
+      new webpack.optimize.UglifyJsPlugin({
+        compress: {
+          warnings: false,
+        },
+      }),
+    ];
 }
 
 export default {
@@ -130,8 +130,8 @@ export default {
       {
         test: /\.js/,
         loader: 'source-map-loader',
-      }
-    ]
+      },
+    ],
   },
   stylus: getStylusConfig(),
   plugins: [
