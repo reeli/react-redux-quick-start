@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router';
+import React, { Component, PropTypes } from 'react';
 import Header from '../components/Header';
 
 class App extends Component {
@@ -12,5 +11,9 @@ class App extends Component {
     );
   }
 }
+
+App.prototype.propTypes = {
+  children: PropTypes.node,
+};
 
 export default App;

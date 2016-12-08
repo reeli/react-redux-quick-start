@@ -1,4 +1,4 @@
-var nodeExternals = require('webpack-node-externals');
+const nodeExternals = require('webpack-node-externals');
 
 module.exports = {
   target: 'node', // in order to ignore built-in modules like path, fs, etc.
@@ -7,8 +7,8 @@ module.exports = {
     loaders: [
       {
         test: /\.js$/,
-        loader: "babel-loader"
-      }
-    ]
-  }
+        loader: 'babel-loader',
+      },
+    ],
+  },
 };
