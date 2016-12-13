@@ -9,3 +9,4 @@ describe('<Header />', () => {
     expect(wrapper.text()).to.contain('Header');
   });
 });
+
