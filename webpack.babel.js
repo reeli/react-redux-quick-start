@@ -151,4 +151,12 @@ export default {
             config: path.join(__dirname, './modules/config/index.js'),
         },
     },
+    devServer: {
+        port: 9000,
+        stats: {
+            chunks: false,
+            colors: true,
+            progeress: true,
+        }
+    },
 };
