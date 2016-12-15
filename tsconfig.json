@@ -1,29 +1,34 @@
 {
   "filesGlob": [
-    "../typings/globals/**/*.*.ts",
-    "**/*.{ts,tsx}"
+    "**/*.ts",
+    "**/*.tsx",
+    "!node_modules/**"
   ],
   "compilerOptions": {
-    "outDir": "./dist",
-    "sourceMap": true,
-    "noImplicitAny": true,
-    "module": "commonjs",
+    "rootDir": ".",
+    "outDir": "dist",
+    "jsx": "react",
     "target": "es6",
-    "jsx": "preserve",
+    "noImplicitAny": true,
+    "noEmitOnError": true,
+    "module": "commonjs",
     "moduleResolution": "node"
   },
   "exclude": [
-    "./typings/index.d.ts",
+    "dist",
+    "typings/index.d.ts",
+    "typings/globals/node/index.d.ts",
     "node_modules"
   ],
-  "files": [
-    "./mobile/onboarding/components/Hello.tsx",
-    "./mobile/onboarding/components/Header.tsx",
-    "./mobile/onboarding/containers/App.tsx",
-    "./mobile/onboarding/containers/Dashboard.tsx",
-    "./mobile/onboarding/containers/Inbox.tsx"
-  ],
+  "allowUnreachableCode": false,
+  "allowUnusedLabels": false,
+  "compileOnSave": false,
+  "buildOnSave": false,
   "atom": {
-    "rewriteTsconfig": true
+    "rewriteTsconfig": false
+  },
+  "awesomeTypescriptLoaderOptions": {
+    "useBabel": true,
+    "useCache": true
   }
 }
