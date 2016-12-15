@@ -7,7 +7,7 @@ import autoprefixerStylus from 'autoprefixer-stylus';
 import config from 'config';
 import {CheckerPlugin} from 'awesome-typescript-loader';
 
-const APP = './mobile';
+const APP = './src';
 const DIST = './dist';
 const DEV_MODE = process.env.NODE_ENV !== 'production';
 
@@ -77,7 +77,7 @@ export default {
             'react-dom',
             'classnames',
         ],
-        app: './index.tsx',
+        app: './index.js',
     },
     output: {
         path: path.join(__dirname, DIST),

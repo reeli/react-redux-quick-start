@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Header from '../components/Header';
 
-class App extends React.Component<{},{}> {
+class App extends React.Component<{}, {}> {
     static propTypes = {
         children: React.PropTypes.node,
     };
