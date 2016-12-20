@@ -1,10 +1,17 @@
 {
   "name": "react-redux-quick-start",
   "globalDependencies": {
+    "classnames": "registry:dt/classnames#0.0.0+20161113184211",
+    "lodash": "registry:global/lodash#4.0.0+20160723033700",
     "node": "registry:dt/node#6.0.0+20161212163245",
     "react": "registry:dt/react#0.14.0+20161203201537",
     "react-dom": "registry:dt/react-dom#0.14.0+20160412154040",
     "react-router": "registry:dt/react-router#2.0.0+20161117134353",
-    "react-router/history": "registry:dt/react-router/history#2.0.0+20160830150755"
+    "react-router/history": "registry:dt/react-router/history#2.0.0+20160830150755",
+    "redux": "registry:dt/redux#3.5.2+20160703092728"
+  },
+  "dependencies": {
+    "react-redux": "registry:npm/react-redux#4.4.0+20160614222153",
+    "redux-actions": "registry:dt/redux-actions#0.8.0+20161123123936"
   }
 }
