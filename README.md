@@ -6,6 +6,4 @@
 
 - yarn install
 
-- typings install
-
 - npm start
