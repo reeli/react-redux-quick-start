@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "rootDir": ".",
     "outDir": "build",
     "jsx": "react",
@@ -8,15 +9,15 @@
     "noImplicitAny": true,
     "moduleResolution": "node",
     "experimentalDecorators": true,
-    "sourceMap": true,
+    "sourceMap": false,
+    "pretty": true,
     "typeRoots": [
       "./node_modules/@types/"
     ]
   },
   "exclude": [
     "dist",
-    "node_modules/*",
-    "**/*.spec.ts{,x}"
+    "node_modules"
   ],
   "compileOnSave": false,
   "buildOnSave": false,

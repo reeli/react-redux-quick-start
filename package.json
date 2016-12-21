@@ -13,7 +13,8 @@
     "start": "NODE_ENV=development webpack-dev-server",
     "release": "NODE_ENV=production npm run build",
     "build": "rm -rf ./dist && webpack",
-    "test": "ava"
+    "test": "rm -rf build/ && tsc && ava -v",
+    "lint": "tslint ./ --fix"
   },
   "devDependencies": {
     "@types/classnames": "^0.0.32",
