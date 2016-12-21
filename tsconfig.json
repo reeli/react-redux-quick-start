@@ -1,29 +1,23 @@
 {
-  "filesGlob": [
-    "**/*.ts",
-    "**/*.tsx",
-    "!node_modules/**"
-  ],
   "compilerOptions": {
     "rootDir": ".",
-    "outDir": "dist",
+    "outDir": "build",
     "jsx": "react",
+    "module": "commonjs",
     "target": "es6",
     "noImplicitAny": true,
-    "noEmitOnError": true,
-    "module": "commonjs",
     "moduleResolution": "node",
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true
+    "sourceMap": true,
+    "typeRoots": [
+      "./node_modules/@types/"
+    ]
   },
   "exclude": [
     "dist",
-    "typings/index.d.ts",
-    "typings/globals/node/index.d.ts",
-    "node_modules"
+    "node_modules/*",
+    "**/*.spec.ts{,x}"
   ],
-  "allowUnreachableCode": false,
-  "allowUnusedLabels": false,
   "compileOnSave": false,
   "buildOnSave": false,
   "atom": {

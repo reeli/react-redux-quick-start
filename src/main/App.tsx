@@ -21,7 +21,6 @@ const mapStateToProps = (state: any) => {
   }
 };
 
-@connect(mapStateToProps)
 class App extends React.Component<AppProps, {}> {
   render() {
     return (
@@ -37,6 +36,6 @@ class App extends React.Component<AppProps, {}> {
   }
 }
 
-export default App;
+export default connect(mapStateToProps)(App);
 
 
