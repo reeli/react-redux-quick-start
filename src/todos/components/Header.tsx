@@ -1,16 +1,16 @@
 import * as React from 'react';
 import TextInput from '../components/TextInput';
 
-interface HeaderProps {
-    addTodo: (text: string) => void
+interface IHeaderProps {
+    addTodo: (text: string) => void;
 }
 
-class Header extends React.Component<HeaderProps, {}> {
+class Header extends React.Component<IHeaderProps, {}> {
     handleOnSave = (text: string) => {
         if (text.length > 0) {
             this.props.addTodo(text);
         }
-    };
+    }
 
     render() {
         return (
@@ -22,7 +22,7 @@ class Header extends React.Component<HeaderProps, {}> {
                     onSave={this.handleOnSave}
                 />
             </header>
-        )
+        );
     }
 }
 

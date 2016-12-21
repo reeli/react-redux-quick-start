@@ -2,17 +2,17 @@ import * as React from 'react';
 import TextInput from './TextInput';
 import {Todo} from '../model';
 
-interface TodoItemProps {
-    todo: Todo,
-    deleteTodo: (todo: Todo) => void,
-    editTodo: (todo: Todo, text: string) => void,
+interface ITodoItemProps {
+    todo: Todo;
+    deleteTodo: (todo: Todo) => void;
+    editTodo: (todo: Todo, text: string) => void;
 }
 
-interface TodoItemState {
-    editing: boolean,
+interface ITodoItemState {
+    editing: boolean;
 }
 
-class TodoItem extends React.Component<TodoItemProps, TodoItemState> {
+class TodoItem extends React.Component<ITodoItemProps, ITodoItemState> {
     state = {
         editing: false,
     };
@@ -21,7 +21,7 @@ class TodoItem extends React.Component<TodoItemProps, TodoItemState> {
         this.setState({
             editing: true,
         });
-    };
+    }
 
     handleOnSave(todo: Todo, text: string) {
         if (text.length === 0) {
@@ -41,26 +41,26 @@ class TodoItem extends React.Component<TodoItemProps, TodoItemState> {
         let element;
         element = editing
             ? <TextInput
-            text={todo.text}
-            editing={editing}
-            onSave={(text) => this.handleOnSave(todo,text)}
-        />
+                text={todo.text}
+                editing={editing}
+                onSave={(text) => this.handleOnSave(todo,text)}
+            />
             : (
-            <div>
-                <input
-                    type='checkbox'
-                />
-                <label onDoubleClick={this.handleDoubleClick}>
-                    {todo.text}
-                </label>
-            </div>
-        );
+                <div>
+                    <input
+                        type='checkbox'
+                    />
+                    <label onDoubleClick={this.handleDoubleClick}>
+                        {todo.text}
+                    </label>
+                </div>
+            );
 
         return (
             <li>
                 {element}
             </li>
-        )
+        );
     }
 }
 

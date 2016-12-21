@@ -1,19 +1,19 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
 
-interface TextInputProps {
-    placeholder?: string,
-    text?: string,
-    newTodo?: boolean,
-    onSave: (text: string) => void,
-    editing?: boolean,
+interface ITextInputProps {
+    placeholder?: string;
+    text?: string;
+    newTodo?: boolean;
+    onSave: (text: string) => void;
+    editing?: boolean;
 }
 
-interface TextInputState {
-    text: string,
+interface ITextInputState {
+    text: string;
 }
 
-class TextInput extends React.Component<TextInputProps, TextInputState> {
+class TextInput extends React.Component<ITextInputProps, ITextInputState> {
     state = {
         text: this.props.text || '',
     };
@@ -22,13 +22,13 @@ class TextInput extends React.Component<TextInputProps, TextInputState> {
         if (!this.props.newTodo) {
             this.props.onSave(e.target.value);
         }
-    };
+    }
 
     handleChange = (e: any) => {
         this.setState({
             text: e.target.value,
-        })
-    };
+        });
+    }
 
     handleSubmit = (e: any) => {
         const text = e.target.value.trim();
@@ -40,7 +40,7 @@ class TextInput extends React.Component<TextInputProps, TextInputState> {
                 });
             }
         }
-    };
+    }
 
     render() {
         const {placeholder, editing} = this.props;
@@ -49,7 +49,7 @@ class TextInput extends React.Component<TextInputProps, TextInputState> {
         return (
             <input
                 className={classNames({
-                edit: editing
+                edit: editing,
                 })}
                 type='text'
                 placeholder={placeholder}
@@ -59,7 +59,7 @@ class TextInput extends React.Component<TextInputProps, TextInputState> {
                 onChange={this.handleChange}
                 onKeyDown={this.handleSubmit}
             />
-        )
+        );
     }
 }
 
