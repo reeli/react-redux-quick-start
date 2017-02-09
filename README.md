@@ -1,9 +1,9 @@
-# react-redux-quick-start
+# jtw-web
 
 ## start
 
 - npm i yarn -g
 
-- yarn install
+- yarn
 
 - npm start

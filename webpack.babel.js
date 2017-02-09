@@ -1,13 +1,12 @@
 import path from 'path';
-import qs from 'qs';
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
-import autoprefixerStylus from 'autoprefixer-stylus';
 import config from 'config';
 
-const APP = './mobile';
+const APP = './src';
 const DIST = './dist';
+const MODULES = './modules';
 const DEV_MODE = process.env.NODE_ENV !== 'production';
 
 const GLOBALS = {
@@ -19,52 +18,21 @@ const GLOBALS = {
   },
 };
 
-const query = {
-  modules: true,
-  importLoaders: 1,
-  sourceMap: true,
-  localIdentName: DEV_MODE ? '[name]__[local]---[hash:base64:5]' : '[hash:base64:5]',
-};
-
-const extractCSS = new ExtractTextPlugin(APP, '[name]-[hash].css', {
+const extractCSS = new ExtractTextPlugin({
+  filename: '[name]-[hash].css',
   allChunks: true,
 });
 
-const createCssLoaderWithStyleLoader = (test, loaders) => {
+const createStyleLoaderWithCssLoader = (test, cssLoader) => {
   if (test) {
-    return ['style-loader'].concat(loaders).join('!');
+    return ['style-loader'].concat(cssLoader).concat('stylus-loader');
   }
-  return extractCSS.extract(loaders);
+
+  return extractCSS.extract({
+    fallback: 'style-loader',
+    use: cssLoader,
+  }).concat('stylus-loader');
 };
-
-const getStylusConfig = () => ({
-  use: [
-    autoprefixerStylus({
-      browsers: [
-        'ie_mob >= 10',
-        'ff >= 30',
-        'chrome >= 34',
-        'safari >= 7',
-        'opera >= 23',
-        'ios >= 7',
-        'android >= 2.3',
-        'bb >= 10',
-      ],
-    }),
-  ],
-});
-
-function getOptimizeConfig() {
-  return DEV_MODE ? []
-    : [
-      new webpack.optimize.DedupePlugin(),
-      new webpack.optimize.UglifyJsPlugin({
-        compress: {
-          warnings: false,
-        },
-      }),
-    ];
-}
 
 export default {
   context: path.join(__dirname, APP),
@@ -81,59 +49,71 @@ export default {
     filename: '[name]-[hash].js',
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /(\.js|\.jsx)$/,
         exclude: /node_modules/,
-        loader: 'babel-loader',
+        use: ['babel-loader'],
       },
       {
         test: /_\.styl$/,
-        loader: createCssLoaderWithStyleLoader(
-          DEV_MODE,
-          [
-            `css-loader?${qs.stringify(query)}`,
-            'stylus-loader',
-          ],
-        ),
+        use: createStyleLoaderWithCssLoader(DEV_MODE, {
+          loader: 'css-loader',
+          options: {
+            sourceMap: true,
+            modules: true,
+          },
+        }),
       },
       {
-        test: /[^_].styl$/,
-        loader: createCssLoaderWithStyleLoader(
-          DEV_MODE,
-          [
-            `css-loader?${qs.stringify({ sourceMap: true })}`,
-            'stylus-loader',
-          ],
-        ),
+        test: /[^_]\.styl$/,
+        use: createStyleLoaderWithCssLoader(DEV_MODE, {
+          loader: 'css-loader',
+          options: {
+            sourceMap: true,
+            modules: false,
+          },
+        }),
       },
       {
-        test: /\.i\.svg$/,
-        loaders: [
-          'svg2jsx',
-          'simplify-svg/lib/loader',
+        test: /(\.png|.jpg)$/,
+        use: [
+          {
+            loader: DEV_MODE ? 'url-loader' : 'file-loader',
+          },
         ],
-      },
-      {
-        test: /\.(png|jpg|etf|ttf)$/,
-        loader: DEV_MODE ? 'url-loader' : 'file-loader',
       },
     ],
   },
-  stylus: getStylusConfig(),
   plugins: [
     extractCSS,
     new HtmlWebpackPlugin({
-      title: 'REACT REDUX QUICK START',
+      title: 'JTW WEB',
       template: './index.html',
     }),
     new webpack.DefinePlugin(GLOBALS),
-    ...getOptimizeConfig(),
+    ...(
+      DEV_MODE
+        ? []
+        : [
+          new webpack.LoaderOptionsPlugin({
+            minimize: true,
+          }),
+          new webpack.optimize.UglifyJsPlugin({}),
+        ]
+    ),
   ],
   resolve: {
-    extensions: ['', '.js', '.jsx'],
+    extensions: ['.js', '.jsx'],
     alias: {
-      config: path.join(__dirname, './modules/config/index.js'),
+      config: path.join(__dirname, MODULES, 'config/index.js'),
+    },
+  },
+  devServer: {
+    port: 9000,
+    stats: {
+      chunks: false,
+      color: true,
     },
   },
 };

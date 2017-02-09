@@ -1,29 +1,22 @@
 {
   "env": {
-    // make sure window and document can be used
     "node": true,
     "es6": true
   },
   "extends": "airbnb",
   "parser": "babel-eslint",
-  "settings": {
-    "import/resolver": {
-      "webpack": {
-        "config": "./webpack.config.js"
-      }
-    }
-  },
   "rules": {
     "react/jsx-filename-extension": 0,
     "react/prefer-stateless-function": 0,
     "jsx-a11y/anchor-has-content": 0,
     "jsx-a11y/no-static-element-interactions": 0,
     "no-underscore-dangle": 0,
-    "import/prefer-default-export": 0
+    "import/prefer-default-export": 0,
+    "react/forbid-prop-types": 0,
+    "react/require-default-props": 0
   },
   "globals": {
-    "describe": true,
-    "it": true,
+    "window": true,
     "document": true
   }
 }

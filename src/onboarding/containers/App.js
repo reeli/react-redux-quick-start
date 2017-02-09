@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import config from 'config';
 
 class App extends Component {
   static propTypes = {
@@ -8,6 +9,7 @@ class App extends Component {
   render() {
     return (
       <div>
+        {config.API_BASE_URL}
         {this.props.children}
       </div>
     );
